@@ -15,36 +15,29 @@ while ((arg = process.argv.shift()) != null) {
   }
 }
 
-// Error handling about
+/** Error handling in place for a lack of arguments (either --item-cost or ) entered into the command line. */
 if (cost == null) {
   console.error('--item-cost is required but not provided. Exiting')
-  process.exit(1) //error exit code should ALWAYS BE 1
+  process.exit(1)
 }
 if (payment == null) {
   console.error('--payment is required but not provided. Exiting')
+  process.exit(1)
 }
 
-console.log(process.argv)
-
-// First concern is getting American currency working. Can refactor for future currency additions.
-// define currency:
+/** American currency values defined here. Pennys not needed because they are a denomination of 1, which is unnecessary for the relevant math in vendingMachine */
 let q = 25
 let d = 10
 let n = 5
-let p = 1
 
-function vendingMachine(
-  costInput: number,
-  paymentInput: number,
-): string | void {
+/** The vendingMachine function takes a costInput (calculated from the --item-cost arg from the command line) and a paymentInput (calculated from the --payment arg from the command line) and returns the itemized change of American currency in named coin denominations along with the calculated total change returned after the cost is subtracted from the payment. Returns message of insufficient funds if cost is greater than payment. */
+function vendingMachine(costInput: number, paymentInput: number): void {
   let response = ''
   if (paymentInput < costInput) {
-    // why does this count as void for typescript?
-    return console.log(
-      `Insufficient funds for desired product. We have returned your $${
-        paymentInput / 100
-      }`,
-    )
+    response += `Insufficient funds for desired product. We have returned your $${
+      paymentInput / 100
+    }`
+    return console.log(response)
   }
   const totalChange = paymentInput - costInput
   const Quarters = Math.floor(totalChange / q)
@@ -60,17 +53,17 @@ function vendingMachine(
     response += `Nickels: ${Nickels} \n`
   }
   const Pennys = Math.floor(
-    totalChange - (Quarters * q + Dimes * d + Nickels * n) / p,
+    totalChange - (Quarters * q + Dimes * d + Nickels * n),
   )
   if (Pennys > 0) {
     response += `Pennys: ${Pennys} \n`
   }
 
-  response += `Total Change: $${totalChange}`
+  response += `Total Change: $${totalChange / 100}`
   return console.log(response)
 }
 
-vendingMachine(525, 220)
+vendingMachine(cost, payment)
 
 // Answer:
 // totalChange: 305c
