@@ -1,3 +1,4 @@
+/** American currency values defined here. Pennys not needed because they are a denomination of 1, which is unnecessary for the relevant math in vendingMachine */
 export default function vendingMachine(
   itemCost: number,
   amountPaid: number,
