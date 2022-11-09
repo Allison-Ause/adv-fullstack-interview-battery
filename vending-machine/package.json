@@ -7,7 +7,8 @@
   "scripts": {
     "start": "ts-node --esm vending-machine.ts",
     "test": "tsc --noEmit",
-    "unit-test": "ts-jest"
+    "unit-test": "jest",
+    "ts-test": ""
   },
   "author": "",
   "license": "ISC",

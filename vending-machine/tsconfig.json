@@ -17,9 +17,7 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "target": "es6",
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "useUnknownInCatchVariables": true
   }
 }
