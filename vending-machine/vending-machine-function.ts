@@ -1,4 +1,7 @@
-export default function vendingMachine(itemCost: number, amountPaid: number) {
+export default function vendingMachine(
+  itemCost: number,
+  amountPaid: number,
+): string {
   let response = ''
   let q = 25
   let d = 10
@@ -8,7 +11,8 @@ export default function vendingMachine(itemCost: number, amountPaid: number) {
     response += `Insufficient funds for desired product. We have returned your $${
       amountPaid / 100
     }`
-    return console.log(response)
+    console.log(response)
+    return response
   }
   const totalChange = amountPaid - itemCost
   const Quarters = Math.floor(totalChange / q)
@@ -31,5 +35,6 @@ export default function vendingMachine(itemCost: number, amountPaid: number) {
   }
 
   response += `Total Change: $${totalChange / 100}`
-  return console.log(response)
+  console.log(response)
+  return response
 }
